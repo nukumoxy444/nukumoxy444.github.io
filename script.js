@@ -13,10 +13,10 @@ function updateDiscordButton(isConnected, username = '') {
             disconnectDiscord();
         };
     } else {
-        discordBtn.innerHTML = '<i class="fab fa-discord"></i> login with discord';
+        discordBtn.innerHTML = '<i class="fab fa-discord"></i> login with discord (auto fill pfp, name, and user id)';
         discordBtn.style.background = 'linear-gradient(135deg, #5865f2, #4752c4)';
         discordBtn.style.border = 'none';
-        discordBtn.title = 'Login with Discord';
+        discordBtn.title = 'login with discord (auto fill pfp, name, and user id)';
         discordBtn.onclick = function() {
             connectDiscord();
         };
