@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Report Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bug Report Submission</h1>
+        <form id="bugForm">
+            <label for="webhookUrl">Discord Webhook URL:</label>
+            <input type="url" id="webhookUrl" required placeholder="https://discord.com/api/webhooks/...">
+
+            <label for="description">Bug Description:</label>
+            <textarea id="description" required placeholder="Describe the bug in detail..."></textarea>
+
+            <label for="userName">Your Name:</label>
+            <input type="text" id="userName" required placeholder="Enter your name">
+
+            <label for="userAvatar">Avatar URL (optional):</label>
+            <input type="url" id="userAvatar" placeholder="https://example.com/avatar.png">
+
+            <label for="server">Server (optional):</label>
+            <input type="text" id="server" placeholder="e.g., My Server">
+
+            <label for="userId">User ID (optional):</label>
+            <input type="text" id="userId" placeholder="Your Discord User ID">
+
+            <button type="submit">Submit Bug Report</button>
+        </form>
+        <div id="response"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
