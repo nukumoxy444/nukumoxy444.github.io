@@ -3,35 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bug Report Form</title>
+    <title>bug report</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>Bug Report Submission</h1>
-        <button type="button" id="loginDiscord" style="background-color: #5865f2; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 20px;">Login with Discord</button>
-        <form id="bugForm">
-            <label for="webhookUrl">Discord Webhook URL:</label>
-            <input type="url" id="webhookUrl" required placeholder="https://discord.com/api/webhooks/...">
+        <h1>what did i do wrong?</h1>
+        <button type="button" id="loginDiscord" class="discord-btn">
+            <i class="fab fa-discord"></i>
+            login with discord (auto fill pfp, name, and user id)
+        </button>
 
-            <label for="description">Bug Description:</label>
-            <textarea id="description" required placeholder="Describe the bug in detail..."></textarea>
+        <form id="bugForm" class="bug-form">
+            <div class="form-group">
+                <label for="webhookUrl">discord webhook url:</label>
+                <input type="url" id="webhookUrl" required placeholder="https://discord.com/api/webhooks/...">
+            </div>
 
-            <label for="userName">Your Name:</label>
-            <input type="text" id="userName" required placeholder="Enter your name">
+            <div class="form-group">
+                <label for="description">bug description:</label>
+                <textarea id="description" required placeholder="describe the bug in detail..."></textarea>
+            </div>
 
-            <label for="userAvatar">Avatar URL (optional):</label>
-            <input type="url" id="userAvatar" placeholder="https://example.com/avatar.png">
+            <div class="form-group">
+                <label for="userName">your name:</label>
+                <input type="text" id="userName" required placeholder="enter your name">
+            </div>
 
-            <label for="server">Server (optional):</label>
-            <input type="text" id="server" placeholder="e.g., My Server">
+            <div class="form-group">
+                <label for="userAvatar">avatar url (optional):</label>
+                <input type="url" id="userAvatar" placeholder="https://example.com/avatar.png">
+            </div>
 
-            <label for="userId">User ID (optional):</label>
-            <input type="text" id="userId" placeholder="Your Discord User ID">
+            <div class="form-group">
+                <label for="server">server (optional):</label>
+                <input type="text" id="server" placeholder="e.g., my server">
+            </div>
 
-            <button type="submit">Submit Bug Report</button>
+            <div class="form-group">
+                <label for="userId">user id (optional):</label>
+                <input type="text" id="userId" placeholder="your discord user id">
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-paper-plane"></i>
+                submit
+            </button>
+
+            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                sending report...
+            </div>
         </form>
-        <div id="response"></div>
+
+        <div id="response" class="response-message"></div>
     </div>
     <script src="script.js"></script>
 </body>
