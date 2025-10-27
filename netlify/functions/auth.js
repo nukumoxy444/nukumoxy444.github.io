@@ -12,7 +12,7 @@ exports.handler = async (event, context) => {
 
   const CLIENT_ID = process.env.DISCORD_CLIENT_ID; // Set in Netlify env
   const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET; // Set in Netlify env
-  const REDIRECT_URI = `https://your-site.netlify.app/.netlify/functions/auth`;
+  const REDIRECT_URI = `https://nukumoxy.netlify.app/.netlify/functions/auth`;
 
   try {
     // Exchange code for token
@@ -42,7 +42,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        Location: `https://your-site.netlify.app/?userId=${userData.id}&username=${encodeURIComponent(userData.username)}&avatar=${encodeURIComponent(userData.avatar)}`,
+        Location: `https://nukumoxy.netlify.app/?userId=${userData.id}&username=${encodeURIComponent(userData.username)}&avatar=${userData.avatar || ''}`,
       },
     };
   } catch (error) {

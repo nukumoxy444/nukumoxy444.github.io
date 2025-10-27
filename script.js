@@ -1,3 +1,28 @@
+// Handle Discord login
+document.getElementById('loginDiscord').addEventListener('click', function() {
+    const clientId = '1432418722756169849'; // Your Discord app's client ID
+    const redirectUri = 'https://nukumoxy.netlify.app/.netlify/functions/auth'; // Your Netlify site URL
+    const scope = 'identify';
+    const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}`;
+    window.location.href = authUrl;
+});
+
+// Pre-fill form from URL parameters after OAuth
+window.addEventListener('load', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('userId');
+    const username = urlParams.get('username');
+    const avatar = urlParams.get('avatar');
+
+    if (userId) {
+        document.getElementById('userId').value = userId;
+        document.getElementById('userName').value = username || '';
+        document.getElementById('userAvatar').value = avatar ? `https://cdn.discordapp.com/avatars/${userId}/${avatar}.png` : '';
+        // Clear URL parameters for security
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+});
+
 document.getElementById('bugForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
