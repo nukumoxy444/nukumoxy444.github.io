@@ -199,19 +199,13 @@ document.getElementById('bugForm').addEventListener('submit', async function (ev
         });
 
         if (response.ok) {
-            responseDiv.className = 'success';
-            responseDiv.textContent = 'TRANSMISSION SUCCESSFUL. INCIDENT LOGGED.';
-            responseDiv.style.display = 'block';
+            showNotification('TRANSMISSION SUCCESSFUL. INCIDENT LOGGED.', 'success');
             document.getElementById('bugForm').reset();
         } else {
-            responseDiv.className = 'error';
-            responseDiv.textContent = `TRANSMISSION FAILED: HTTP ${response.status}`;
-            responseDiv.style.display = 'block';
+            showNotification(`TRANSMISSION FAILED: HTTP ${response.status}`, 'error');
         }
     } catch (error) {
-        responseDiv.className = 'error';
-        responseDiv.textContent = `CRITICAL ERROR: ${error.message}`;
-        responseDiv.style.display = 'block';
+        showNotification(`CRITICAL ERROR: ${error.message}`, 'error');
     } finally {
         // Reset loading state
         submitBtn.disabled = false;

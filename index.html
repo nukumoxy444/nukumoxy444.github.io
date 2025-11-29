@@ -24,30 +24,32 @@
             AUTHENTICATE AGENT (DISCORD)
         </button>
 
-        <div class="form-group">
-            <label for="description">INCIDENT DETAILS:</label>
-            <textarea id="description" required placeholder="DESCRIBE THE ANOMALY IN DETAIL..."></textarea>
-        </div>
+        <form id="bugForm">
+            <div class="form-group">
+                <label for="description">INCIDENT DETAILS:</label>
+                <textarea id="description" required placeholder="DESCRIBE THE ANOMALY IN DETAIL..."></textarea>
+            </div>
 
-        <div class="form-group">
-            <label for="userName">AGENT CODENAME:</label>
-            <input type="text" id="userName" required placeholder="ENTER CODENAME">
-        </div>
+            <div class="form-group">
+                <label for="userName">AGENT CODENAME:</label>
+                <input type="text" id="userName" required placeholder="ENTER CODENAME">
+            </div>
 
-        <div class="form-group">
-            <label for="userAvatar">AGENT AVATAR (OPTIONAL):</label>
-            <input type="url" id="userAvatar" placeholder="IMAGE SOURCE URL">
-        </div>
+            <div class="form-group">
+                <label for="userAvatar">AGENT AVATAR (OPTIONAL):</label>
+                <input type="url" id="userAvatar" placeholder="IMAGE SOURCE URL">
+            </div>
 
-        <div class="form-group">
-            <label for="userId">AGENT ID (OPTIONAL):</label>
-            <input type="text" id="userId" placeholder="NUMERIC IDENTIFIER">
-        </div>
+            <div class="form-group">
+                <label for="userId">AGENT ID (OPTIONAL):</label>
+                <input type="text" id="userId" placeholder="NUMERIC IDENTIFIER">
+            </div>
 
-        <button type="submit" class="submit-btn" id="submitBtn">
-            <i class="fas fa-satellite-dish"></i>
-            TRANSMIT DATA
-        </button>
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fas fa-satellite-dish"></i>
+                TRANSMIT DATA
+            </button>
+        </form>
 
         <div class="loading-spinner" id="loadingSpinner" style="display: none;">
             <i class="fas fa-circle-notch fa-spin"></i>
