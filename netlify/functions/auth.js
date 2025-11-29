@@ -1,5 +1,3 @@
-// Using native fetch (Node 18+)
-
 exports.handler = async (event, context) => {
   const { code } = event.queryStringParameters;
 
@@ -10,12 +8,11 @@ exports.handler = async (event, context) => {
     };
   }
 
-  const CLIENT_ID = process.env.DISCORD_CLIENT_ID; // Set in Netlify env
-  const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET; // Set in Netlify env
+  const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
+  const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
   const REDIRECT_URI = `https://nukumoxy.netlify.app/.netlify/functions/auth`;
 
   try {
-    // Exchange code for token
     const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -31,14 +28,12 @@ exports.handler = async (event, context) => {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    // Fetch user data
     const userResponse = await fetch('https://discord.com/api/users/@me', {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
 
     const userData = await userResponse.json();
 
-    // Redirect back to site with user data (or store in session)
     return {
       statusCode: 302,
       headers: {

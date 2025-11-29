@@ -3,21 +3,19 @@ function updateDiscordButton(isConnected, username = '') {
     const discordBtn = document.getElementById('loginDiscord');
 
     if (isConnected) {
-        discordBtn.innerHTML = `<i class="fas fa-user-check"></i> connected as ${username}`;
-        discordBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-        discordBtn.style.border = '2px solid rgba(255, 255, 255, 0.3)';
-        discordBtn.title = 'Click to disconnect';
+        discordBtn.innerHTML = `<i class="fas fa-user-secret"></i> AGENT IDENTIFIED: ${username}`;
+        discordBtn.classList.add('connected');
+        discordBtn.title = 'TERMINATE SESSION';
 
         // Add click handler to disconnect
-        discordBtn.onclick = function() {
+        discordBtn.onclick = function () {
             disconnectDiscord();
         };
     } else {
-        discordBtn.innerHTML = '<i class="fab fa-discord"></i> login with discord (auto fill pfp, name, and user id)';
-        discordBtn.style.background = 'linear-gradient(135deg, #5865f2, #4752c4)';
-        discordBtn.style.border = 'none';
-        discordBtn.title = 'login with discord (auto fill pfp, name, and user id)';
-        discordBtn.onclick = function() {
+        discordBtn.innerHTML = '<i class="fab fa-discord"></i> AUTHENTICATE AGENT (DISCORD)';
+        discordBtn.classList.remove('connected');
+        discordBtn.title = 'AUTHENTICATE WITH DISCORD';
+        discordBtn.onclick = function () {
             connectDiscord();
         };
     }
@@ -32,7 +30,7 @@ function connectDiscord() {
 
     // Add loading state to Discord button
     const discordBtn = document.getElementById('loginDiscord');
-    discordBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> connecting...';
+    discordBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> ESTABLISHING SECURE LINK...';
     discordBtn.disabled = true;
 
     // Redirect to Discord OAuth
@@ -41,7 +39,7 @@ function connectDiscord() {
 
 // Disconnect from Discord function
 function disconnectDiscord() {
-    if (confirm('Are you sure you want to disconnect your Discord account? You will need to reconnect to auto-fill your details.')) {
+    if (confirm('WARNING: TERMINATING SECURE SESSION. AGENT DATA WILL BE PURGED. PROCEED?')) {
         // Clear saved data
         localStorage.removeItem('discordUserData');
 
@@ -54,7 +52,7 @@ function disconnectDiscord() {
         updateDiscordButton(false);
 
         // Show notification
-        showNotification('Discord account disconnected successfully!', 'success');
+        showNotification('SESSION TERMINATED. AGENT LOGGED OUT.', 'success');
     }
 }
 
@@ -80,7 +78,7 @@ function showNotification(message, type) {
 document.getElementById('loginDiscord').addEventListener('click', connectDiscord);
 
 // Handle OAuth callback data and check for saved user data
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const userId = urlParams.get('userId');
     const username = urlParams.get('username');
@@ -106,7 +104,7 @@ window.addEventListener('load', function() {
         window.history.replaceState({}, document.title, window.location.pathname);
 
         // Show success message
-        showNotification('Discord account connected and saved!', 'success');
+        showNotification('SECURE LINK ESTABLISHED. AGENT VERIFIED.', 'success');
     } else {
         // Check for saved user data in localStorage
         const savedUserData = localStorage.getItem('discordUserData');
@@ -142,7 +140,7 @@ window.addEventListener('load', function() {
 });
 
 // Form submission
-document.getElementById('bugForm').addEventListener('submit', async function(event) {
+document.getElementById('bugForm').addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const submitBtn = document.getElementById('submitBtn');
@@ -150,40 +148,38 @@ document.getElementById('bugForm').addEventListener('submit', async function(eve
     const responseDiv = document.getElementById('response');
 
     // Get form data
-    const webhookUrl = document.getElementById('webhookUrl').value;
     const description = document.getElementById('description').value;
     const userName = document.getElementById('userName').value;
     const userAvatar = document.getElementById('userAvatar').value || null;
-    const server = document.getElementById('server').value || 'web submission';
-    const userId = document.getElementById('userId').value || 'N/A';
+    const server = document.getElementById('server') ? document.getElementById('server').value : 'SECURE TERMINAL';
+    const userId = document.getElementById('userId').value || 'UNKNOWN';
 
     // Generate timestamp
     const now = new Date();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const year = now.getFullYear();
-    const hour12 = now.getHours() % 12 || 12;
-    const minute = String(now.getMinutes()).padStart(2, '0');
-    const ampm = now.getHours() >= 12 ? 'pm' : 'am';
-    const timestamp = `${month}/${day}/${year} at ${hour12}:${minute} ${ampm}`;
+    const timestamp = now.toISOString();
 
-    // Create Discord embed (1:1 of the original nux bug cmd)
+    // Create Discord embed
     const embed = {
-        title: "bug report",
-        description: description,
-        color: 0xff0000,
+        title: "⚠ CLASSIFIED INCIDENT REPORT ⚠",
+        description: `**INCIDENT DETAILS:**\n${description}`,
+        color: 0xcc0000, // Dark Red
         author: {
-            name: userName,
+            name: `AGENT: ${userName}`,
             icon_url: userAvatar
         },
+        footer: {
+            text: "CONFIDENTIAL // LEVEL 7 CLEARANCE"
+        },
         fields: [
-            { name: "server", value: server, inline: true },
-            { name: "timestamp", value: timestamp, inline: true },
-            { name: "user id", value: userId, inline: true }
+            { name: "ORIGIN", value: server, inline: true },
+            { name: "TIMESTAMP", value: timestamp, inline: true },
+            { name: "AGENT ID", value: userId, inline: true }
         ]
     };
 
     const payload = {
+        username: "INCIDENT LOGGER",
+        avatar_url: "https://cdn.discordapp.com/embed/avatars/0.png",
         embeds: [embed]
     };
 
@@ -194,7 +190,7 @@ document.getElementById('bugForm').addEventListener('submit', async function(eve
     responseDiv.style.display = 'none';
 
     try {
-        const response = await fetch(webhookUrl, {
+        const response = await fetch('/.netlify/functions/submit-report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -204,17 +200,17 @@ document.getElementById('bugForm').addEventListener('submit', async function(eve
 
         if (response.ok) {
             responseDiv.className = 'success';
-            responseDiv.textContent = 'bug report sent successfully!';
+            responseDiv.textContent = 'TRANSMISSION SUCCESSFUL. INCIDENT LOGGED.';
             responseDiv.style.display = 'block';
             document.getElementById('bugForm').reset();
         } else {
             responseDiv.className = 'error';
-            responseDiv.textContent = `failed to send bug report: HTTP ${response.status}`;
+            responseDiv.textContent = `TRANSMISSION FAILED: HTTP ${response.status}`;
             responseDiv.style.display = 'block';
         }
     } catch (error) {
         responseDiv.className = 'error';
-        responseDiv.textContent = `error sending bug report: ${error.message}`;
+        responseDiv.textContent = `CRITICAL ERROR: ${error.message}`;
         responseDiv.style.display = 'block';
     } finally {
         // Reset loading state

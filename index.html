@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bug report</title>
+    <title>CLASSIFIED UPLINK</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
+    <div class="scanline"></div>
     <div class="container">
-        <h1>what did i do wrong?</h1>
+        <div class="header-stamp">TOP SECRET // LEVEL 7</div>
+        <h1>REPORT ANOMALY</h1>
+        <div class="warning-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            WARNING: CLASSIFIED INFORMATION. UNAUTHORIZED ACCESS IS PROHIBITED.
+        </div>
+
         <button type="button" id="loginDiscord" class="discord-btn">
             <i class="fab fa-discord"></i>
-            login with discord (auto fill pfp, name, and user id)
+            AUTHENTICATE AGENT (DISCORD)
         </button>
 
-        <form id="bugForm" class="bug-form">
-            <div class="form-group">
-                <label for="webhookUrl">discord webhook url:</label>
-                <input type="url" id="webhookUrl" required placeholder="https://discord.com/api/webhooks/...">
-            </div>
+        <div class="form-group">
+            <label for="description">INCIDENT DETAILS:</label>
+            <textarea id="description" required placeholder="DESCRIBE THE ANOMALY IN DETAIL..."></textarea>
+        </div>
 
-            <div class="form-group">
-                <label for="description">bug description:</label>
-                <textarea id="description" required placeholder="describe the bug in detail..."></textarea>
-            </div>
+        <div class="form-group">
+            <label for="userName">AGENT CODENAME:</label>
+            <input type="text" id="userName" required placeholder="ENTER CODENAME">
+        </div>
 
-            <div class="form-group">
-                <label for="userName">your name:</label>
-                <input type="text" id="userName" required placeholder="enter your name">
-            </div>
+        <div class="form-group">
+            <label for="userAvatar">AGENT AVATAR (OPTIONAL):</label>
+            <input type="url" id="userAvatar" placeholder="IMAGE SOURCE URL">
+        </div>
 
-            <div class="form-group">
-                <label for="userAvatar">avatar url (optional):</label>
-                <input type="url" id="userAvatar" placeholder="https://example.com/avatar.png">
-            </div>
+        <div class="form-group">
+            <label for="userId">AGENT ID (OPTIONAL):</label>
+            <input type="text" id="userId" placeholder="NUMERIC IDENTIFIER">
+        </div>
 
-            <div class="form-group">
-                <label for="userId">user id (optional):</label>
-                <input type="text" id="userId" placeholder="your discord user id">
-            </div>
+        <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-satellite-dish"></i>
+            TRANSMIT DATA
+        </button>
 
-            <button type="submit" class="submit-btn" id="submitBtn">
-                <i class="fas fa-paper-plane"></i>
-                submit
-            </button>
-
-            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
-                <i class="fas fa-spinner fa-spin"></i>
-                sending report...
-            </div>
+        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+            <i class="fas fa-circle-notch fa-spin"></i>
+            ESTABLISHING UPLINK...
+        </div>
         </form>
 
         <div id="response" class="response-message"></div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
