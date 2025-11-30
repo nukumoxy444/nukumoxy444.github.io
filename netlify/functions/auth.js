@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
 
   const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
   const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-  const REDIRECT_URI = `https://nukumoxy.netlify.app/.netlify/functions/auth`;
+  const REDIRECT_URI = `https://nukumoxy777.netlify.app/.netlify/functions/auth`;
 
   try {
     const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
@@ -37,7 +37,7 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 302,
       headers: {
-        Location: `https://nukumoxy.netlify.app/?userId=${userData.id}&username=${encodeURIComponent(userData.username)}&avatar=${userData.avatar || ''}`,
+        Location: `https://nukumoxy777.netlify.app/?userId=${userData.id}&username=${encodeURIComponent(userData.username)}&avatar=${userData.avatar || ''}`,
       },
     };
   } catch (error) {

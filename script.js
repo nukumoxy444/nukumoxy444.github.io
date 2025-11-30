@@ -24,7 +24,7 @@ function updateDiscordButton(isConnected, username = '') {
 // Connect to Discord function
 function connectDiscord() {
     const clientId = '1432418722756169849'; // nukumoxy bot id
-    const redirectUri = 'https://nukumoxy.netlify.app/.netlify/functions/auth';
+    const redirectUri = 'https://nukumoxy777.netlify.app/.netlify/functions/auth';
     const scope = 'identify';
     const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=${scope}`;
 
